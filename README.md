@@ -10,6 +10,7 @@ MeshCore provides a complete stack of Bluetooth mesh from bearer layer to access
 MeshCore releases easy application interfaces for network establishment and management. Developers could focus on the application-level.
 
 Get lastest news of MeshCore, see blog http://blog.csdn.net/blxble.
+
 Get Bluetooth Mesh Profile specification, visit https://www.bluetooth.com.
 
 
@@ -29,5 +30,7 @@ Features:
 *	Provision without OOB, with Input OOB, Output OOB and static OOB
 *	Runtime parameter configurable
 
+
 Bluetooth qulification test for MeshCore is ongoing...
+
 Integration on other platforms is ongoing...
