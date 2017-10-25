@@ -1,16 +1,38 @@
 #ifndef _SM_CONFIG_H_
 #define _SM_CONFIG_H_
 
-#define SM_DEBUG                            (0)
+#if defined (SM_CFG_DEBUG)
+#define SM_MESH_DEBUG                       (1)
+#else
+#define SM_MESH_DEBUG                       (0)
+#endif
 
 #define SM_ADV_AND_SCAN_COEXIST             (0)
 #define SM_CONF_ADV_CHANNEL_MAP             (0x07)
+
 #define SM_PB_GATT_SUPPORT                  (1)
+#if defined (SM_CONF_PB_GATT_ONLY)
 #define SM_PB_GATT_ONLY                     (SM_PB_GATT_SUPPORT && 1)
+#else
+#define SM_PB_GATT_ONLY                     (SM_PB_GATT_SUPPORT && 0)
+#endif
+
 #define SM_PROXY_GATT_SUPPORT               (1)
+#if defined (SM_CONF_PROXY_GATT_SERVER)
 #define SM_PROXY_GATT_SERVER                (SM_PROXY_GATT_SUPPORT && 1)
+#else
+#define SM_PROXY_GATT_SERVER                (SM_PROXY_GATT_SUPPORT && 0)
+#endif
+#if defined (SM_CONF_PROXY_GATT_CLIENT)
+#define SM_PROXY_GATT_CLIENT                (SM_PROXY_GATT_SUPPORT && 1)
+#else
 #define SM_PROXY_GATT_CLIENT                (SM_PROXY_GATT_SUPPORT && 0)
+#endif
+#if defined (SM_CONF_PROXY_GATT_ONLY)
+#define SM_PROXY_GATT_ONLY                  (SM_PROXY_GATT_CLIENT && 1)
+#else
 #define SM_PROXY_GATT_ONLY                  (SM_PROXY_GATT_CLIENT && 0)
+#endif
 #define SM_RELAY_SUPPORT                    (1)
 #define SM_DUPLICATED_CACHE_DEPTH           (8)
 #define SM_TRANSMIC_64BIT                   (0)
@@ -19,9 +41,9 @@
 #define SM_LOW_POWER_NODE_SUPPORT           (0)
 #define SM_FRIEND_NODE_SUPPORT              (0)
 #define SM_IVI_INIT_VAL                     (0x00000000)
-#define SM_TOPOLOGY_DETECT_SUPPORT          (0)
+#define SM_TOPOLOGY_DETECT_SUPPORT          (1)
 
-#if (NVDS_SUPPORT == 0) && !defined(CFG_TEST_API)
+#if !defined (SM_CFG_EASY_CONF)
 /**
  * ***************************************************************************
  *                                BEARER LAYER

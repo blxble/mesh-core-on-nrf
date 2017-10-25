@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'smart_mesh_nrf52832_s132_full' 
+ * Project: 'smart_mesh_nrf52832_s132' 
  * Target:  'nrf52832_xxaa' 
  */
 
