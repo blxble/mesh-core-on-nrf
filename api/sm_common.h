@@ -28,7 +28,7 @@
 #define SM_ADDR_IS_GROUP(addr)      (((addr & 0xC000) == 0xC000) && (addr != SM_ADDR_BROADCAST))
 #define SM_ADDR_IS_VIRTUAL(addr)    ((addr & 0xC000) == 0x8000)
 
-#if (SM_DEBUG)
+#if (SM_MESH_DEBUG)
 #include "log.h"
 #define SM_ASSERT_ERR               ASSERT_ERR
 #define SM_LOG_INFO                 LOG_IPRINT

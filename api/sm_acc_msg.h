@@ -10,9 +10,9 @@
 #define _SM_ACC_MSG_H_
 
 
-#define SMACC_MSG_VMID_SIG                                      (0xFFFF)   ///< not official definition
+#define SMACC_MSG_VMID_SIG                                      (0x0000)   ///< not official definition
 #define SMACC_MSG_MID2VMID(mid)                                 (((sm_vmid_t)(mid)) | ((sm_vmid_t)SMACC_MSG_VMID_SIG << 16))
-#define SMACC_MSG_IS_VMID(mid)                                  ((((mid) >> 16) & SMACC_MSG_VMID_SIG) == SMACC_MSG_VMID_SIG)
+#define SMACC_MSG_IS_VMID(mid)                                  ((((mid) >> 16) & 0xFFFF) != SMACC_MSG_VMID_SIG)
 
 /**
  * access message definition

@@ -58,7 +58,7 @@ uint8_t g_sm_conf_oob_in_size_supported                = (0);
 uint8_t g_sm_conf_oob_in_act_supported                 = (0x00);
 uint16_t g_sm_conf_ttl_def_val                         = (0x0C);
 uint16_t g_sm_conf_company_id                          = (0x0000);         // 16-bit
-uint16_t g_sm_conf_product_id                          = (0x0001);         // 16-bit
+uint16_t g_sm_conf_product_id                          = (0x0000);         // 16-bit
 uint16_t g_sm_conf_version_id                          = (0x0000);         // 16-bit
 sm_uuid_t g_sm_conf_local_uuid                         = {0xAA, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, \
                                                           0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};

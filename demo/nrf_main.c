@@ -71,6 +71,16 @@ static void nrf_ble_stack_init(void)
 
     // Register a BLE event handler with the SoftDevice handler library.
     err_code = softdevice_ble_evt_handler_set(nrf_ble_evt_dispatch);
+
+    ble_gap_addr_t      addr;
+    addr.addr_type = BLE_GAP_ADDR_TYPE_RANDOM_STATIC;
+    addr.addr[0] = 0x00;
+    addr.addr[1] = 0xEE;
+    addr.addr[2] = 0xDD;
+    addr.addr[3] = 0xCC;
+    addr.addr[4] = 0xBB;
+    addr.addr[5] = 0xFF;
+    //sd_ble_gap_addr_set(&addr);
 }
 
 void main(void)

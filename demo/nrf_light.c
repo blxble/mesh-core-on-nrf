@@ -8,6 +8,8 @@
 #include "sm_acc_msg.h"
 #include "sm_acc.h"
 #include "sm_mod_msg.h"
+#include "nrf_log.h"
+#include "nrf_log_ctrl.h"
 #include "nrf_light.h"
 
 typedef struct
@@ -20,7 +22,7 @@ static nrf_light_elt_t g_nrf_light_elt;
 
 static sm_mid_t g_nrf_light_mid[] = 
 {
-    0x8002,
+    0x1000,
 };
 
 static void _nrf_light_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t src_addr, int32_t appkey_idx, int8_t rssi)
@@ -44,6 +46,14 @@ static void _nrf_light_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t s
             delay = *(msg->param + 3);
 
             // TODO: set device onoff 
+            if (onoff > 0)
+            {
+                NRF_LOG_INFO("Light ON!");
+            }
+            else
+            {
+                NRF_LOG_INFO("Light OFF!");
+            }
 
             pre_onoff = g_nrf_light_elt.onoff;
             g_nrf_light_elt.onoff = onoff;

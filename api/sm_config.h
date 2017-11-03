@@ -41,7 +41,7 @@
 #define SM_LOW_POWER_NODE_SUPPORT           (0)
 #define SM_FRIEND_NODE_SUPPORT              (0)
 #define SM_IVI_INIT_VAL                     (0x00000000)
-#define SM_TOPOLOGY_DETECT_SUPPORT          (1)
+#define SM_TOPOLOGY_DETECT_SUPPORT          (0)
 
 #if !defined (SM_CFG_EASY_CONF)
 /**
@@ -169,7 +169,7 @@
  *                                  User Defined
  */
 #define SM_COMPANY_ID                       (0x0000)    // 16-bit
-#define SM_PRODUCT_ID                       (0x0001)    // 16-bit
+#define SM_PRODUCT_ID                       (0x0000)    // 16-bit
 #define SM_VERSION_ID                       (0x0000)    // 16-bit
 #define SM_LOCAL_UUID                       {0xAA, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, \
                                              0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF}

@@ -35,6 +35,13 @@ void nrf_on_ble_gap_evt(ble_evt_t * ble_evt)
 {
     uint32_t              err_code;
     ble_gap_evt_t* gap_evt = &ble_evt->evt.gap_evt;
+    const ble_gap_conn_params_t conn_param =
+    {
+        .min_conn_interval = (uint16_t)60,   // Minimum connection interval.
+        .max_conn_interval = (uint16_t)60,   // Maximum connection interval.
+        .slave_latency     = (uint16_t)0,    // Slave latency.
+        .conn_sup_timeout  = (uint16_t)100   // Supervisory timeout.
+    };
 
     switch (ble_evt->header.evt_id)
     {
@@ -44,6 +51,8 @@ void nrf_on_ble_gap_evt(ble_evt_t * ble_evt)
         case BLE_GAP_EVT_CONNECTED:
             g_nrf_peer_bd.addr_type = gap_evt->params.connected.peer_addr.addr_type;
             memcpy(g_nrf_peer_bd.addr, gap_evt->params.connected.peer_addr.addr, BLE_GAP_ADDR_LEN);
+
+            sd_ble_gap_conn_param_update(g_nrf_conn_hdl, &conn_param);
             break;
         case BLE_GAP_EVT_DISCONNECTED:
             break;
@@ -53,7 +62,7 @@ void nrf_on_ble_gap_evt(ble_evt_t * ble_evt)
             break;
     }
 }
-static bool adv_working = false;
+
 void smport_start_advertise(uint8_t adv_type, uint16_t intvl_min, uint16_t intval_max, uint8_t chan_map,
                                     uint8_t* data, uint8_t data_len)
 {
