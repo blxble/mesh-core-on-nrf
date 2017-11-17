@@ -77,6 +77,23 @@ enum
     SMUI_CONF_OP_BIND_MOD_APPKEY,               ///< admin binds a application with node model
 };
 
+enum
+{
+    SMUI_OOB_INFO_OTHER                          = 0,
+    SMUI_OOB_INFO_ELECTONIC_URI                  = 1,
+    SMUI_OOB_INFO_2D_MACHINE_READABLE_CODE       = 2,
+    SMUI_OOB_INFO_BAR_CODE                       = 3,
+    SMUI_OOB_INFO_NFC                            = 4,
+    SMUI_OOB_INFO_NUMBER                         = 5,
+    SMUI_OOB_INFO_STRING                         = 6,
+    ///< 7 - 10 reserved for future use
+    SMUI_OOB_INFO_ON_BOX                         = 11,
+    SMUI_OOB_INFO_INSIDE_BOX                     = 12,
+    SMUI_OOB_INFO_ON_PIECE_PAPER                 = 13,
+    SMUI_OOB_INFO_INSIDE_MANUAL                  = 14,
+    SMUI_OOB_INFO_ON_DEVICE                      = 15
+};
+
 /**
  * Paramter of notice @SMUI_NOTICE_NET_CREATED
  */
@@ -215,6 +232,26 @@ void smui_reset(void);
 void smui_reg_callback(smui_cbk_t cbk);
 
 /**
+ * Request to join a mesh network
+ * This action leads to broadcast a beacon
+ * @param[in]  timeout  action timeout, 0 for infinite
+ * @param[in]  oob_info out of band information, see @SMUI_OOB_INFO_xxx
+ */
+void smui_join_net(uint32_t timeout, uint16_t oob_info);
+
+/**
+ * Wait to back a network
+ * @param[in]  timeout  waiting timeout
+ */
+void smui_back_to_net(uint32_t timeout);
+
+/**
+ * Enable device as a proxy server
+ * This device will be a proxy server connected by a client such as mobile phone
+ */
+void smui_enable_proxy(void);
+
+/**
  * Set authentication data to mesh core
  * When input OOB authentication selected, use this function to pass the authentication data
  * which size should tally with the size requested by notice @SMUI_NOTICE_REQ_AUTH_VALUE 
@@ -296,7 +333,7 @@ void smui_set_device_mod_publication(sm_addr_t dev_addr, sm_addr_t elt_addr, sm_
  * @param[in]  elt_addr    element address which contains tha model
  * @param[in]  mid         model identifier, if it is a SIG-model, transfer its id
  *                         to vendor-model format fristly utilizing @SMACC_MSG_MID2VMID()
- * @param[in]  subs_addr   subscribe address
+ * @param[in]  subs_addr   subscribed address
  */
 void smui_add_device_mod_subscription(sm_addr_t dev_addr, sm_addr_t elt_addr, sm_vmid_t mid, sm_addr_t subs_addr);
 

@@ -11,6 +11,18 @@
 #define _SM_PORT_EVT_H_
 
 /**
+ * Initialize the mesh system
+ * This interface shall be called before any other mesh interfaces.
+ */
+void smport_platform_init(void);
+
+/**
+ * mesh system scheduler
+ * This inteface should be called at the main (task) schedule loop.
+ */
+void smport_platform_schedule(void);
+
+/**
  * Indciate advertising report.
  * @param[in]  bd        bluetooth address that adv report comes from
  * @param[in]  adv_type  advertising type
