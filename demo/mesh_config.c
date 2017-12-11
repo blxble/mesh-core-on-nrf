@@ -7,7 +7,7 @@
 #include "sm_port.h"
 
 uint16_t g_sm_conf_pbadv_adv_intvl                     = (100);          // x1ms
-uint16_t g_sm_conf_pbadv_send_evt_win                  = (400);          // x1ms
+uint16_t g_sm_conf_pbadv_send_evt_win                  = (500);          // x1ms
 uint16_t g_sm_conf_pbadv_scan_win                      = (100);          // x1ms
 uint16_t g_sm_conf_pbadv_scan_intvl                    = (100);          // x1ms
 uint16_t g_sm_conf_detect_beacon_win                   = (100);          // x1ms
@@ -60,6 +60,6 @@ uint16_t g_sm_conf_ttl_def_val                         = (0x0C);
 uint16_t g_sm_conf_company_id                          = (0x0000);         // 16-bit
 uint16_t g_sm_conf_product_id                          = (0x0000);         // 16-bit
 uint16_t g_sm_conf_version_id                          = (0x0000);         // 16-bit
-sm_uuid_t g_sm_conf_local_uuid                         = {0xAA, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, \
+sm_uuid_t g_sm_conf_local_uuid                         = {0x78, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, \
                                                           0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};
 uint32_t g_sm_conf_elt_light_cache_flush_timeout       = (360000);         // x10ms

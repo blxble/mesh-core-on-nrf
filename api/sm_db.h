@@ -13,6 +13,8 @@
 #endif
 #define SMDB_MAX_APPKEY_NUM                 (64)
 
+#define SMDB_KEY_REFRESH_FLAG               (0x80000000)
+
 typedef struct
 {
     sm_addr_t                   elt_addr;
@@ -65,16 +67,16 @@ uint8_t* smdb_load_netkey_at_pos(uint16_t pos, uint32_t* netkey_idx, uint8_t* ni
 uint16_t smdb_get_netkey_num(void);
 bool smdb_remove_netkey(uint32_t idx);
 bool smdb_update_netkey(uint32_t idx, uint8_t* net_key, uint8_t nid, uint8_t* nwk_id, uint8_t* enc_key, uint8_t* pri_key, uint8_t* bcon_key);
-void smdb_store_kr_netkey(uint8_t* net_key, uint8_t nid, uint8_t* enc_key, uint8_t* pri_key, uint8_t* nwk_id, uint8_t* bcon_key);
-uint8_t* smdb_load_kr_netkey(uint8_t** nwk_id, uint8_t** enc_key, uint8_t** pri_key, uint8_t** bcon_key);
-bool smdb_recover_with_kr_netkey(uint8_t netkey_idx);
-void smdb_set_netkey_idx(uint16_t idx);
-uint16_t smdb_get_netkey_idx(void);
+void smdb_revoke_netkey(uint32_t idx);
+smdb_err_t smdb_store_kr_netkey(uint32_t netkey_idx, uint8_t* net_key, uint8_t nid, uint8_t* nwk_id, uint8_t* enc_key, uint8_t* pri_key, uint8_t* bcon_key);
+bool smdb_update_kr_netkey(uint32_t idx, uint8_t* net_key, uint8_t nid, uint8_t* nwk_id, uint8_t* enc_key, uint8_t* pri_key, uint8_t* bcon_key);
+uint8_t* smdb_load_kr_netkey(uint32_t idx, uint8_t* nid, uint8_t** nwk_id, uint8_t** enc_key, uint8_t** pri_key, uint8_t** bcon_key);
+void smdb_set_primary_netkey_idx(uint16_t idx);
+uint16_t smdb_get_primary_netkey_idx(void);
 void smdb_store_seq(uint32_t seq);
 uint32_t smdb_load_seq(void);
 void smdb_update_ivi(sm_ivi_t new_ivi);
-sm_ivi_t smdb_get_previous_ivi(void);
-sm_ivi_t smdb_get_current_ivi(void);
+sm_ivi_t smdb_get_ivi(void);
 uint8_t smdb_load_attention_timer(void);
 void smdb_store_attention_timer(uint8_t att_timer);
 uint8_t smdb_load_default_ttl(void);

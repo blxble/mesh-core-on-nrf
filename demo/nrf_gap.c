@@ -67,7 +67,7 @@ void smport_start_advertise(uint8_t adv_type, uint16_t intvl_min, uint16_t intva
                                     uint8_t* data, uint8_t data_len)
 {
     uint32_t err;
-    
+
     ble_gap_adv_params_t adv_params =
     {
         .type         = adv_type,
@@ -75,20 +75,21 @@ void smport_start_advertise(uint8_t adv_type, uint16_t intvl_min, uint16_t intva
         .fp           = BLE_GAP_ADV_FP_ANY,
         .interval     = intvl_min,
         .timeout      = 0,
-        .channel_mask = chan_map,
+        .channel_mask = 0,
     };
-    
     err = sd_ble_gap_adv_data_set(data, data_len, NULL, 0);
     err = sd_ble_gap_adv_start(&adv_params);
 }
 
 void smport_stop_advertise(void)
 {
-    sd_ble_gap_adv_stop();
+    uint32_t err;
+    err = sd_ble_gap_adv_stop();
 }
 
 void smport_start_scan(uint16_t intvl, uint16_t win)
 {
+    uint32_t err;
     ble_gap_scan_params_t scan_params;
     scan_params.active = 0;
     scan_params.use_whitelist = 0;
@@ -97,12 +98,13 @@ void smport_start_scan(uint16_t intvl, uint16_t win)
     scan_params.window = win;
     scan_params.timeout = 0;
     
-    sd_ble_gap_scan_start(&scan_params);
+    err = sd_ble_gap_scan_start(&scan_params);
 }
 
 void smport_stop_scan(void)
 {
-    sd_ble_gap_scan_stop();
+    uint32_t err;
+    //err = sd_ble_gap_scan_stop();
 }
 
 void smport_aes_encrypt(uint8_t* key, uint8_t* clear_text)
@@ -144,6 +146,7 @@ void smport_gatt_advertise(uint16_t svc_uuid, uint8_t* svc_data, uint8_t data_le
 
 void smport_gatt_create_connect(sm_bdaddr_t* bd, uint16_t gatt_svc_uuid)
 {
+    uint32_t err;
     ble_gap_addr_t addr;
     ble_gap_scan_params_t const scan_param =
     {
@@ -166,7 +169,7 @@ void smport_gatt_create_connect(sm_bdaddr_t* bd, uint16_t gatt_svc_uuid)
     addr.addr_type = bd->addr_type;
     memcpy(addr.addr, bd->addr, BLE_GAP_ADDR_LEN);
 
-    sd_ble_gap_connect(&addr, &scan_param, &conn_param);
+    err = sd_ble_gap_connect(&addr, &scan_param, &conn_param);
 }
 
 void smport_gatt_disconnect(uint16_t conn_hdl, uint8_t reason, uint16_t gatt_svc_uuid)

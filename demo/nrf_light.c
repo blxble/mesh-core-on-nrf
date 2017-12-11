@@ -11,6 +11,9 @@
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_light.h"
+#include "nrf_gpio.h"
+
+#define NRF_LED_PIN         (30)
 
 typedef struct
 {
@@ -22,7 +25,7 @@ static nrf_light_elt_t g_nrf_light_elt;
 
 static sm_mid_t g_nrf_light_mid[] = 
 {
-    0x1000,
+    NRF_LIGHT_MID,
 };
 
 static void _nrf_light_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t src_addr, int32_t appkey_idx, int8_t rssi)
@@ -49,10 +52,12 @@ static void _nrf_light_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t s
             if (onoff > 0)
             {
                 NRF_LOG_INFO("Light ON!");
+                nrf_gpio_pin_write(NRF_LED_PIN, 1);
             }
             else
             {
                 NRF_LOG_INFO("Light OFF!");
+                nrf_gpio_pin_write(NRF_LED_PIN, 0);
             }
 
             pre_onoff = g_nrf_light_elt.onoff;
@@ -80,6 +85,8 @@ static void _nrf_light_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t s
 
 void nrf_light_init(void)
 {
+    nrf_gpio_cfg_output(NRF_LED_PIN);
+    
     memset(&g_nrf_light_elt, 0x00, sizeof(g_nrf_light_elt));
     
     g_nrf_light_elt.elt_idx = smacc_reg_element(sizeof(g_nrf_light_mid)/sizeof(sm_mid_t), g_nrf_light_mid, 0, NULL, 

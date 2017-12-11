@@ -41,7 +41,12 @@ void* smport_create_timer(smport_timer_handler handler)
 
 void smport_start_timer(void* timer, uint32_t timeout, void* context)
 {
-    app_timer_start((app_timer_id_t)timer, APP_TIMER_TICKS((timeout * 10), 0), context);
+    uint32_t ticks = APP_TIMER_TICKS((timeout * 10), 0);
+
+    if (ticks < APP_TIMER_MIN_TIMEOUT_TICKS)
+        ticks = APP_TIMER_MIN_TIMEOUT_TICKS;
+    
+    app_timer_start((app_timer_id_t)timer, ticks, context);
 }
 
 void smport_stop_timer(void* timer)
@@ -56,10 +61,15 @@ void smport_clear_timer(void* timer)
 
 void smport_enter_critical(uint32_t* cr)
 {
+    CRITICAL_REGION_ENTER() 
+    *cr = __CR_NESTED;}
 }
 
 void smport_exit_critical(uint32_t cr)
 {
+    { uint8_t __CR_NESTED;
+    __CR_NESTED = (uint8_t)cr;
+    CRITICAL_REGION_EXIT();
 }
 
 #endif

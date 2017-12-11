@@ -17,7 +17,7 @@
 #define SM_PB_GATT_ONLY                     (SM_PB_GATT_SUPPORT && 0)
 #endif
 
-#define SM_PROXY_GATT_SUPPORT               (1)
+#define SM_PROXY_GATT_SUPPORT               (0)
 #if defined (SM_CONF_PROXY_GATT_SERVER)
 #define SM_PROXY_GATT_SERVER                (SM_PROXY_GATT_SUPPORT && 1)
 #else
