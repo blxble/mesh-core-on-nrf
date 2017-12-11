@@ -50,7 +50,7 @@ static void _nrf_switch_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t 
     }
 }
 
- void _nrf_switch_on_off(void)
+static void _nrf_switch_on_off(void)
 {
     const sm_msg_opcode_t onoff_set_op = SMMOD_MSG_OPCODE_GENERIC_ONOFF_SET;
     uint8_t onoff;

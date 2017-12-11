@@ -28,7 +28,7 @@ extern void nrf_provs_on_ble_evt(ble_evt_t* ble_evt);
 extern void nrf_proxyc_on_ble_evt(ble_evt_t* ble_evt);
 extern void nrf_proxys_on_ble_evt(ble_evt_t* ble_evt);
 
-static void nrf_ble_evt_dispatch(ble_evt_t * ble_evt)
+static void _nrf_ble_evt_dispatch(ble_evt_t * ble_evt)
 {
     nrf_on_ble_gap_evt(ble_evt);
 #if (SM_PB_GATT_SUPPORT)
@@ -44,6 +44,26 @@ static void nrf_ble_evt_dispatch(ble_evt_t * ble_evt)
 #if (SM_PROXY_GATT_SERVER)
     nrf_proxys_on_ble_evt(ble_evt);
 #endif
+}
+
+static void _nrf_mesh_attention(smui_attention_param_t* param)
+{
+    if (param->duration > 0)
+    {
+        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
+    }
+    else
+    {
+        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
+        nrf_delay_ms(60);
+        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
+        nrf_delay_ms(60);
+        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
+        nrf_delay_ms(60);
+        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
+        nrf_delay_ms(60);
+        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
+    }
 }
 
 static void nrf_mesh_ui_cbk(smui_notice_t notice, void* param)
@@ -62,24 +82,16 @@ static void nrf_mesh_ui_cbk(smui_notice_t notice, void* param)
     case SMUI_NOTICE_CONFIG_DONE:
         nrf_admin_config_done((smui_config_done_param_t*)param);
         break;
-#else
+#endif
+    case SMUI_NOTICE_ATTENTION:
+        _nrf_mesh_attention((smui_attention_param_t*)param);
+        break;
     case SMUI_NOTICE_NET_JOINT:
         if (((smui_net_joint_param_t*)param)->success)
         {
             smui_enable_proxy();
         }
-
-        // twinkle
-        nrf_gpio_cfg_output(NRF_INDICATOR_PIN);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
-        nrf_delay_ms(100);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
-        nrf_delay_ms(100);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
-        nrf_delay_ms(100);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
         break;
-#endif
     }
 }
 
@@ -108,7 +120,7 @@ static void nrf_ble_stack_init(void)
     err_code = softdevice_enable(&ble_enable_params);
 
     // Register a BLE event handler with the SoftDevice handler library.
-    err_code = softdevice_ble_evt_handler_set(nrf_ble_evt_dispatch);
+    err_code = softdevice_ble_evt_handler_set(_nrf_ble_evt_dispatch);
 }
 
 void main(void)
@@ -116,6 +128,10 @@ void main(void)
     NRF_LOG_INIT(NULL);
     
     nrf_mem_init();
+
+    // twinkle
+    nrf_gpio_cfg_output(NRF_INDICATOR_PIN);
+    
     nrf_ble_stack_init();
 
     smport_platform_init();
