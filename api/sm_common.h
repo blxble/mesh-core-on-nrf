@@ -10,9 +10,9 @@
 #define SM_NODE_ID_HASH_SIZE        (8)
 #define SM_NODE_ID_RAND_SIZE        (8)
 
-#define SM_ADV_TYPE_MESH_BEACON     (0x7B)//(0x2B)
-#define SM_ADV_TYPE_PB_ADV          (0x79)//(0x29)
-#define SM_ADV_TYPE_CORE_MSG        (0x7A)//(0x2A)
+#define SM_ADV_TYPE_MESH_BEACON     (0x2B)
+#define SM_ADV_TYPE_PB_ADV          (0x29)
+#define SM_ADV_TYPE_CORE_MSG        (0x2A)
 #define SM_PROVISION_SERVICE_UUID   (ATT_SVC_PROVS)
 #define SM_PROXY_SERVICE_UUID       (ATT_SVC_PROXYS)
 
