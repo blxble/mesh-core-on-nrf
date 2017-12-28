@@ -32,6 +32,7 @@ typedef struct
     nrf_db_list_hdr_t           hdr;
     sm_uuid_t                   uuid;
     sm_addr_t                   dev_addr;
+    sm_uuid_t                   dev_info;
     uint8_t                     dev_key[SM_KEY_SIZE];
     uint32_t                    states;
     nrf_db_list_t               elt_info_list;
@@ -384,7 +385,7 @@ void smdb_init(void)
 {
     g_smdb_virtual.seq = 0;
     g_smdb_virtual.cur_ivi = 0;
-    g_smdb_virtual.def_ttl = 63;
+    g_smdb_virtual.def_ttl = 4;
     _nrf_db_list_init(&g_smdb_virtual.netkey_list);
     _nrf_db_list_init(&g_smdb_virtual.appkey_list);
 #if (SM_PROVISIONER_SUPPORT)
@@ -459,7 +460,7 @@ void smdb_reset(void)
     }
 #endif
 
-    memset(&g_smdb_virtual, 0x00, sizeof(g_smdb_virtual));
+    sm_memset(&g_smdb_virtual, 0x00, sizeof(g_smdb_virtual));
 }
 
 uint16_t smdb_store_element(uint16_t idx, sm_addr_t elt_addr)
@@ -867,7 +868,7 @@ sm_addr_t smdb_load_dev_address(void)
 
 void smdb_store_devkey(uint8_t* dev_key)
 {
-    memcpy(g_smdb_virtual.dev_key, dev_key, SM_KEY_SIZE);
+    sm_memcpy(g_smdb_virtual.dev_key, dev_key, SM_KEY_SIZE);
 }
 
 uint8_t* smdb_load_devkey(void)
@@ -875,7 +876,7 @@ uint8_t* smdb_load_devkey(void)
     uint8_t* key;
     
     key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
-    memcpy(key, g_smdb_virtual.dev_key, SM_KEY_SIZE);
+    sm_memcpy(key, g_smdb_virtual.dev_key, SM_KEY_SIZE);
 
     return key;
 }
@@ -902,7 +903,7 @@ smdb_err_t smdb_store_appkey(uint16_t netkey_idx, uint16_t appkey_idx, uint8_t* 
     appkey_node->idx = appkey_idx;
     if (app_key != NULL)
     {
-        memcpy(appkey_node->appkey, app_key, SM_KEY_SIZE);
+        sm_memcpy(appkey_node->appkey, app_key, SM_KEY_SIZE);
     }
     appkey_node->appid = aid;
     _nrf_db_list_push_back(&g_smdb_virtual.appkey_list, (nrf_db_list_hdr_t*)appkey_node);
@@ -928,7 +929,7 @@ uint8_t* smdb_load_appkey(uint16_t appkey_idx, uint8_t* aid, uint16_t* netkey_id
     if (appkey_node != NULL)
     {
         key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
-        memcpy(key, appkey_node->appkey, SM_KEY_SIZE);
+        sm_memcpy(key, appkey_node->appkey, SM_KEY_SIZE);
         *aid = appkey_node->appid;
 
         netkey_node = (smdb_netkey_node_t*)_nrf_db_list_pick(&g_smdb_virtual.netkey_list);
@@ -974,7 +975,7 @@ uint8_t* smdb_load_appkey_at_pos(uint16_t pos, uint16_t* appkey_idx, uint8_t* ai
     if (appkey_node != NULL)
     {
         key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
-        memcpy(key, appkey_node->appkey, SM_KEY_SIZE);
+        sm_memcpy(key, appkey_node->appkey, SM_KEY_SIZE);
         *aid = appkey_node->appid;
 
         *appkey_idx = appkey_node->idx;
@@ -1044,7 +1045,7 @@ bool smdb_update_appkey(uint16_t netkey_idx, uint16_t appkey_idx, uint8_t* app_k
     {
         if (app_key != NULL)
         {
-            memcpy(appkey_node->appkey, app_key, SM_KEY_SIZE);
+            sm_memcpy(appkey_node->appkey, app_key, SM_KEY_SIZE);
         }
         appkey_node->appid = aid;
     }
@@ -1102,26 +1103,26 @@ smdb_err_t smdb_store_netkey(uint32_t netkey_idx, uint8_t* net_key, uint8_t nid,
     
     if (net_key != NULL)
     {
-        memcpy(netkey_node->netkey, net_key, SM_KEY_SIZE);
+        sm_memcpy(netkey_node->netkey, net_key, SM_KEY_SIZE);
     }
     
     netkey_node->nid = nid;
     
     if (nwk_id != NULL)
     {
-        memcpy(netkey_node->nwk_id, nwk_id, SM_NETWORK_ID_SIZE);
+        sm_memcpy(netkey_node->nwk_id, nwk_id, SM_NETWORK_ID_SIZE);
     }
     if (enc_key != NULL)
     {
-        memcpy(netkey_node->enckey, enc_key, SM_KEY_SIZE);
+        sm_memcpy(netkey_node->enckey, enc_key, SM_KEY_SIZE);
     }
     if (pri_key != NULL)
     {
-        memcpy(netkey_node->prikey, pri_key, SM_KEY_SIZE);
+        sm_memcpy(netkey_node->prikey, pri_key, SM_KEY_SIZE);
     }
     if (bcon_key != NULL)
     {
-        memcpy(netkey_node->bconkey, bcon_key, SM_KEY_SIZE);
+        sm_memcpy(netkey_node->bconkey, bcon_key, SM_KEY_SIZE);
     }
 
     _nrf_db_list_push_back(&g_smdb_virtual.netkey_list, (nrf_db_list_hdr_t*)netkey_node);
@@ -1139,7 +1140,7 @@ uint8_t* smdb_load_netkey(uint32_t idx, uint8_t* nid, uint8_t** nwk_id, uint8_t*
     {
         key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
         SM_ASSERT_ERR(key);
-        memcpy(key, netkey_node->netkey, SM_KEY_SIZE);
+        sm_memcpy(key, netkey_node->netkey, SM_KEY_SIZE);
 
         if (nid != NULL)
         {
@@ -1150,28 +1151,28 @@ uint8_t* smdb_load_netkey(uint32_t idx, uint8_t* nid, uint8_t** nwk_id, uint8_t*
         {
             *nwk_id = smport_malloc(SM_NETWORK_ID_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*nwk_id);
-            memcpy(*nwk_id, netkey_node->nwk_id, SM_NETWORK_ID_SIZE);
+            sm_memcpy(*nwk_id, netkey_node->nwk_id, SM_NETWORK_ID_SIZE);
         }
 
         if (enc_key != NULL)
         {
             *enc_key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*enc_key);
-            memcpy(*enc_key, netkey_node->enckey, SM_KEY_SIZE);
+            sm_memcpy(*enc_key, netkey_node->enckey, SM_KEY_SIZE);
         }
 
         if (pri_key != NULL)
         {
             *pri_key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*pri_key);
-            memcpy(*pri_key, netkey_node->prikey, SM_KEY_SIZE);
+            sm_memcpy(*pri_key, netkey_node->prikey, SM_KEY_SIZE);
         }
 
         if (bcon_key != NULL)
         {
             *bcon_key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*bcon_key);
-            memcpy(*bcon_key, netkey_node->bconkey, SM_KEY_SIZE);
+            sm_memcpy(*bcon_key, netkey_node->bconkey, SM_KEY_SIZE);
         }
     }
     else
@@ -1216,7 +1217,7 @@ uint8_t* smdb_load_netkey_at_pos(uint16_t pos, uint32_t* netkey_idx, uint8_t* ni
         
         key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
         SM_ASSERT_ERR(key);
-        memcpy(key, netkey_node->netkey, SM_KEY_SIZE);
+        sm_memcpy(key, netkey_node->netkey, SM_KEY_SIZE);
 
         if (nid != NULL)
         {
@@ -1227,28 +1228,28 @@ uint8_t* smdb_load_netkey_at_pos(uint16_t pos, uint32_t* netkey_idx, uint8_t* ni
         {
             *nwk_id = smport_malloc(SM_NETWORK_ID_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*nwk_id);
-            memcpy(*nwk_id, netkey_node->nwk_id, SM_NETWORK_ID_SIZE);
+            sm_memcpy(*nwk_id, netkey_node->nwk_id, SM_NETWORK_ID_SIZE);
         }
 
         if (enc_key != NULL)
         {
             *enc_key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*enc_key);
-            memcpy(*enc_key, netkey_node->enckey, SM_KEY_SIZE);
+            sm_memcpy(*enc_key, netkey_node->enckey, SM_KEY_SIZE);
         }
 
         if (pri_key != NULL)
         {
             *pri_key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*pri_key);
-            memcpy(*pri_key, netkey_node->prikey, SM_KEY_SIZE);
+            sm_memcpy(*pri_key, netkey_node->prikey, SM_KEY_SIZE);
         }
 
         if (bcon_key != NULL)
         {
             *bcon_key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
             SM_ASSERT_ERR(*bcon_key);
-            memcpy(*bcon_key, netkey_node->bconkey, SM_KEY_SIZE);
+            sm_memcpy(*bcon_key, netkey_node->bconkey, SM_KEY_SIZE);
         }
     }
     
@@ -1296,26 +1297,26 @@ bool smdb_update_netkey(uint32_t idx, uint8_t* net_key, uint8_t nid, uint8_t* nw
     {
         if (net_key != NULL)
         {
-            memcpy(netkey_node->netkey, net_key, SM_KEY_SIZE);
+            sm_memcpy(netkey_node->netkey, net_key, SM_KEY_SIZE);
         }
         
         netkey_node->nid = nid;
         
         if (nwk_id != NULL)
         {
-            memcpy(netkey_node->nwk_id, nwk_id, SM_NETWORK_ID_SIZE);
+            sm_memcpy(netkey_node->nwk_id, nwk_id, SM_NETWORK_ID_SIZE);
         }
         if (enc_key != NULL)
         {
-            memcpy(netkey_node->enckey, enc_key, SM_KEY_SIZE);
+            sm_memcpy(netkey_node->enckey, enc_key, SM_KEY_SIZE);
         }
         if (pri_key != NULL)
         {
-            memcpy(netkey_node->prikey, pri_key, SM_KEY_SIZE);
+            sm_memcpy(netkey_node->prikey, pri_key, SM_KEY_SIZE);
         }
         if (bcon_key != NULL)
         {
-            memcpy(netkey_node->bconkey, bcon_key, SM_KEY_SIZE);
+            sm_memcpy(netkey_node->bconkey, bcon_key, SM_KEY_SIZE);
         }
         ret = true;
     }
@@ -1329,7 +1330,7 @@ void smdb_revoke_netkey(uint32_t idx)
     old_netkey_node = _smdb_find_netkey_node(&g_smdb_virtual.netkey_list, idx);
     new_netkey_node = _smdb_find_netkey_node(&g_smdb_virtual.netkey_list, (idx | SMDB_KEY_REFRESH_FLAG));
 
-    memcpy(&new_netkey_node->appkey_idx_list, &old_netkey_node->appkey_idx_list, sizeof(nrf_db_list_t));
+    sm_memcpy(&new_netkey_node->appkey_idx_list, &old_netkey_node->appkey_idx_list, sizeof(nrf_db_list_t));
 
     co_list_extract(&g_smdb_virtual.netkey_list, (struct co_list_hdr*)old_netkey_node, 0);
     smport_free(old_netkey_node);
@@ -1426,8 +1427,8 @@ void smdb_store_provisioned_node(sm_uuid_t* uuid, sm_addr_t dev_addr, uint8_t *d
 
     dev_node = smport_malloc(sizeof(smdb_dev_node_t), SM_MEM_RETENTION);
     SM_ASSERT_ERR(dev_node);
-    memcpy(&dev_node->uuid, uuid, sizeof(sm_uuid_t));
-    memcpy(&dev_node->dev_key, dev_key, SM_KEY_SIZE);
+    sm_memcpy(&dev_node->uuid, uuid, sizeof(sm_uuid_t));
+    sm_memcpy(&dev_node->dev_key, dev_key, SM_KEY_SIZE);
     dev_node->dev_addr = dev_addr;
     dev_node->states = 0;
     _nrf_db_list_init(&dev_node->elt_info_list);
@@ -1521,6 +1522,38 @@ uint16_t smdb_get_provisioned_node_number(void)
     return _nrf_db_list_size(&g_smdb_virtual.dev_list);
 }
 
+void smdb_store_device_info(sm_addr_t dev_addr, sm_device_info_t* dev_info)
+{
+    smdb_dev_node_t* dev_node;
+
+    dev_node = (smdb_dev_node_t*)_nrf_db_list_pick(&g_smdb_virtual.dev_list);
+    while (dev_node != NULL)
+    {
+        if (dev_node->dev_addr == dev_addr)
+        {
+            sm_memcpy(&dev_node->dev_info, dev_info, sizeof(sm_device_info_t));
+            break;
+        }
+        dev_node = (smdb_dev_node_t*)_nrf_db_list_next((nrf_db_list_hdr_t*)dev_node);
+    }
+}
+
+void smdb_load_device_info(sm_addr_t dev_addr, sm_device_info_t* dev_info)
+{
+    smdb_dev_node_t* dev_node;
+
+    dev_node = (smdb_dev_node_t*)_nrf_db_list_pick(&g_smdb_virtual.dev_list);
+    while (dev_node != NULL)
+    {
+        if (dev_node->dev_addr == dev_addr)
+        {
+            sm_memcpy(dev_info, &dev_node->dev_info, sizeof(sm_device_info_t));
+            break;
+        }
+        dev_node = (smdb_dev_node_t*)_nrf_db_list_next((nrf_db_list_hdr_t*)dev_node);
+    }
+}
+
 void smdb_store_element_info(sm_addr_t dev_addr, sm_addr_t elt_addr, uint8_t mid_num, uint8_t vmid_num,
                                              sm_mid_t* mid_arr, sm_vmid_t* vmid_arr)
 {
@@ -1537,12 +1570,26 @@ void smdb_store_element_info(sm_addr_t dev_addr, sm_addr_t elt_addr, uint8_t mid
             elt_node->info.elt_addr = elt_addr;
             elt_node->info.mid_num = mid_num;
             elt_node->info.vmid_num = vmid_num;
-            elt_node->info.mid_arr = smport_malloc(mid_num * sizeof(sm_mid_t), SM_MEM_RETENTION);
-            SM_ASSERT_ERR(elt_node->info.mid_arr);
-            memcpy(elt_node->info.mid_arr, mid_arr, mid_num * sizeof(sm_mid_t));
-            elt_node->info.vmid_arr = smport_malloc(vmid_num * sizeof(sm_vmid_t), SM_MEM_RETENTION);
-            SM_ASSERT_ERR(elt_node->info.vmid_arr);
-            memcpy(elt_node->info.vmid_arr, vmid_arr, vmid_num * sizeof(sm_vmid_t));
+            if (mid_num > 0)
+            {
+                elt_node->info.mid_arr = smport_malloc(mid_num * sizeof(sm_mid_t), SM_MEM_RETENTION);
+                SM_ASSERT_ERR(elt_node->info.mid_arr);
+                sm_memcpy(elt_node->info.mid_arr, mid_arr, mid_num * sizeof(sm_mid_t));
+            }
+            else
+            {
+                elt_node->info.mid_arr = NULL;
+            }
+            if (vmid_num > 0)
+            {
+                elt_node->info.vmid_arr = smport_malloc(vmid_num * sizeof(sm_vmid_t), SM_MEM_RETENTION);
+                SM_ASSERT_ERR(elt_node->info.vmid_arr);
+                sm_memcpy(elt_node->info.vmid_arr, vmid_arr, vmid_num * sizeof(sm_vmid_t));
+            }
+            else
+            {
+                elt_node->info.vmid_arr = NULL;
+            }
             _nrf_db_list_push_back(&dev_node->elt_info_list, (nrf_db_list_hdr_t*)elt_node);
             break;
         }
@@ -1593,7 +1640,7 @@ smdb_element_info_t* smdb_load_element_info_by_idx(sm_addr_t dev_addr, uint8_t e
                 if (elt_idx == 0)
                 {
                     elt_info = smport_malloc(sizeof(smdb_element_info_t), SM_MEM_NON_RETENTION);
-                    memcpy(elt_info, &(elt_node->info), sizeof(smdb_element_info_t));
+                    sm_memcpy(elt_info, &(elt_node->info), sizeof(smdb_element_info_t));
                     break;
                 }
                 else
@@ -1619,7 +1666,7 @@ uint8_t* smdb_load_node_devkey(sm_addr_t dev_addr)
         if (dev_node->dev_addr == dev_addr)
         {
             key = smport_malloc(SM_KEY_SIZE, SM_MEM_NON_RETENTION);
-            memcpy(key, dev_node->dev_key, SM_KEY_SIZE);
+            sm_memcpy(key, dev_node->dev_key, SM_KEY_SIZE);
             return key;
         }
         dev_node = (smdb_dev_node_t*)_nrf_db_list_next((nrf_db_list_hdr_t*)dev_node);

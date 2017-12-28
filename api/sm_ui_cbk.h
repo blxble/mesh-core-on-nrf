@@ -11,7 +11,7 @@ void smui_cbk_indcate_auth_value(uint8_t auth_type, uint8_t auth_act, uint8_t si
 #if (SM_PROVISIONER_SUPPORT)
 void smui_cbk_new_device_detected(sm_uuid_t* uuid, sm_bdaddr_t* bd, bool pb_flag,
                                                     uint8_t* ext_data, uint8_t ext_data_len, uint8_t rssi);
-void smui_cbk_new_device(bool success, sm_addr_t dev_addr, sm_device_info_t* dev_info);
+void smui_cbk_new_device(bool success, sm_addr_t dev_addr, sm_uuid_t* uuid);
 void smui_cbk_read_pub_key_oob(void);
 #endif
 

@@ -26,9 +26,11 @@ typedef enum
     SMUI_NOTICE_READ_PUBKEY_OOB,
     SMUI_NOTICE_SHOW_AUTH_VALUE,
     SMUI_NOTICE_REQ_AUTH_VALUE,
+    SMUI_NOTICE_CONFIGURED,                     ///< for node
     SMUI_NOTICE_SEC_KEY_UPDATED,
     SMUI_NOTICE_NEW_DEVICE_ADDED,
-    SMUI_NOTICE_CONFIG_DONE,
+    SMUI_NOTICE_CONFIG_DONE,                    ///< for provisioner
+    SMUI_NOTICE_PROXY_STATUS,
     SMUI_NOTICE_TOPOLOGICAL_RELATION,
 } smui_notice_t;
 
@@ -65,18 +67,38 @@ enum
 };
 
 /**
+ * Configurated state
+ */
+enum
+{
+    SMUI_CONF_STAT_UNKNOWN           = 0,
+
+    SMUI_CONF_STAT_NETKEY,
+    SMUI_CONF_STAT_APPKEY,
+    SMUI_CONF_STAT_PUBLICATION,
+    SMUI_CONF_STAT_SUBSCRIPTION,
+    SMUI_CONF_STAT_BOUND,
+    SMUI_CONF_STAT_PROXY,
+};
+
+/**
  * Configuration operations
  */
 enum
 {
-    SMUI_CONF_OP_UNKOWN               = 0,
-        
+    SMUI_CONF_OP_UNKNOWN              = 0,
+
+    SMUI_CONF_OP_GET_COMPOSITION_DATA,          ///< admin get composition data from node
     SMUI_CONF_OP_ADD_APPKEY,                    ///< admin adds a application key to node
-    SMUI_CONF_OP_SET_MOD_PUBLICATION,           ///< admin sets publish paramters to node model
-    SMUI_CONF_OP_ADD_MOD_SUBSCRIPTION,          ///< admin adds subscription list to node model
-    SMUI_CONF_OP_BIND_MOD_APPKEY,               ///< admin binds a application with node model
+    SMUI_CONF_OP_SET_MOD_PUBLICATION,           ///< admin sets publish paramters to node 
+    SMUI_CONF_OP_ADD_MOD_SUBSCRIPTION,          ///< admin adds subscription list to node 
+    SMUI_CONF_OP_BIND_MOD_APPKEY,               ///< admin binds a application with node 
+    SMUI_CONF_OP_SET_PROXY,                     ///< admin set proxy state to node
 };
 
+/**
+ * OOB information
+ */
 enum
 {
     SMUI_OOB_INFO_OTHER                          = 0,
@@ -92,6 +114,32 @@ enum
     SMUI_OOB_INFO_ON_PIECE_PAPER                 = 13,
     SMUI_OOB_INFO_INSIDE_MANUAL                  = 14,
     SMUI_OOB_INFO_ON_DEVICE                      = 15
+};
+
+enum
+{
+    SMUI_PROXY_STATE_DISABLE,
+    SMUI_PROXY_STATE_ENABLE,
+    SMUI_PROXY_STATE_UNSUPPORT,
+};
+
+/**
+ * Policy for proxy client
+ */
+enum
+{
+    SMUI_PROXY_CLI_POLICY_ANY,                  ///< any device is acceptable as server
+    SMUI_PROXY_CLI_POLICY_DEDICATED,            ///< only dedicated device is acceptable as server
+};
+
+/**
+ * Proxy status
+ */
+enum
+{
+    SMUI_PROXY_STATUS_CONNECTED,
+    SMUI_PROXY_STATUS_DISCONNECTED,
+    SMUI_PROXY_STATUS_TIMEOUT,
 };
 
 /**
@@ -170,13 +218,21 @@ typedef struct
 } smui_request_auth_value_param_t;
 
 /**
+ * Paramter of notice @SMUI_NOTICE_CONFIGURED
+ */
+typedef struct
+{
+    uint8_t                     conf_st;                ///< configured state, reference SMUI_CONF_STAT_xxx
+} smui_configured_param_t;
+
+/**
  * Paramter of notice @SMUI_NOTICE_NEW_DEVICE_ADDED
  */
 typedef struct
 {
     bool                        success;                ///< provision success or not
-    sm_device_info_t            dev_info;               ///< device information 
     sm_addr_t                   dev_addr;               ///< device address
+    sm_uuid_t                   uuid;
 } smui_new_device_added_param_t;
 
 /**
@@ -188,6 +244,14 @@ typedef struct
     bool                        success;                ///< success or not
     uint8_t                     conf_op;                ///< configuration operation, reference SMUI_CONF_OP_xxx
 } smui_config_done_param_t;
+
+/**
+ * Paramter of notice @SMUI_NOTICE_PROXY_STATUS
+ */
+typedef struct
+{
+    uint8_t                     status;
+} smui_proxy_status_param_t;
 
 typedef struct smui_topological_relation_tag
 {
@@ -248,8 +312,21 @@ void smui_back_to_net(uint32_t timeout);
 /**
  * Enable device as a proxy server
  * This device will be a proxy server connected by a client such as mobile phone
+ * @param[in]  enable     enable or disable
+ * @param[in]  netkey_idx key index of network in which device will be a proxy server
  */
-void smui_enable_proxy(void);
+void smui_set_proxy_server(bool enable, uint16_t netkey_idx);
+
+/**
+ * Enable device as a proxy client
+ * This device will be a proxy client connected with a servere
+ * @param[in]  enable     enable or disable
+ * @param[in]  netkey_idx key index of network in which device will be a proxy client
+ * @param[in]  policy     policy executed when setting up proxy client, reference SMUI_PROXY_CLI_POLICY_xxx
+ * @param[in]  timeout    unit in 10ms
+ * @param[in]  server_bd  if policy is set to SMUI_PROXY_CLI_POLICY_DEDICATED, then this is the dedicated bluetooth address
+ */
+void smui_set_proxy_client(bool enable, uint16_t netkey_idx, uint8_t policy, uint32_t timeout, sm_bdaddr_t* server_bd);
 
 /**
  * Set authentication data to mesh core
@@ -301,6 +378,15 @@ void smui_set_oob_pubkey(uint8_t* x, uint8_t* y);
 uint16_t smui_new_appkey(uint16_t netkey_idx);
 
 /**
+ * Administrator get composition data from node
+ * The compsition data includes element information, device information and features
+ * that node supports. Once this procedure finished, these information could be found
+ * in database.
+ * @param[in]  dev_addr   device address of target node
+ */
+void smui_get_device_composition_data(sm_addr_t dev_addr);
+
+/**
  * Administrator add an application key to a node
  * The reuslt of this operation would be returned via notice @SMUI_NOTICE_CONFIG_DONE
  * with parameter @SMUI_CONF_OP_ADD_APPKEY.
@@ -348,6 +434,15 @@ void smui_add_device_mod_subscription(sm_addr_t dev_addr, sm_addr_t elt_addr, sm
  * @param[in]  appkey_idx  application key index
  */
 void smui_bind_device_mod_appkey(sm_addr_t dev_addr, sm_addr_t elt_addr, sm_vmid_t mid, uint16_t appkey_idx);
+
+/**
+ * Administrator set proxy state to a node model
+ * The result of this operation would be returned via notice @SMUI_NOTICE_CONFIG_DONE
+ * with parameter @SMUI_CONF_OP_SET_PROXY.
+ * @param[in]  dev_addr    device address of target node
+ * @param[in]  state       proxy state, reference SMUI_PROXY_STATE_xxx
+ */
+void smui_set_device_proxy_state(sm_addr_t dev_addr, uint8_t state);
 #endif
 #if (SM_LOW_POWER_NODE_SUPPORT)
 /**

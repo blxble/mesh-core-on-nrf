@@ -17,6 +17,8 @@
 #include "nrf_log_ctrl.h"
 #include "softdevice_handler.h"
 #include "nrf_demo_config.h"
+#include "nrf_ipc.h"
+#include "nrf_admin.h"
 #include "nrf_light.h"
 #include "nrf_switch.h"
 
@@ -28,21 +30,39 @@ extern void nrf_provs_on_ble_evt(ble_evt_t* ble_evt);
 extern void nrf_proxyc_on_ble_evt(ble_evt_t* ble_evt);
 extern void nrf_proxys_on_ble_evt(ble_evt_t* ble_evt);
 
+bool g_nrf_main_joint_net = false;
+
 static void _nrf_ble_evt_dispatch(ble_evt_t * ble_evt)
 {
     nrf_on_ble_gap_evt(ble_evt);
 #if (SM_PB_GATT_SUPPORT)
 #if (NRF_DEMO_ADMIN_SUPPORT)
-    nrf_provc_on_ble_evt(ble_evt);
+    if (nrf_admin_get_stage() == NRF_ADMIN_STAGE_PROVISION)
+    {
+        nrf_provc_on_ble_evt(ble_evt);
+    }
 #else
-    nrf_provs_on_ble_evt(ble_evt);
+    if (g_nrf_main_joint_net == false)
+    {
+        nrf_provs_on_ble_evt(ble_evt);
+    }
 #endif
 #endif
+
+#if (NRF_DEMO_ADMIN_SUPPORT)
 #if (SM_PROXY_GATT_CLIENT)
-    nrf_proxyc_on_ble_evt(ble_evt);
+    if (nrf_admin_get_stage() == NRF_ADMIN_STAGE_CONFIG)
+    {
+        nrf_proxyc_on_ble_evt(ble_evt);
+    }
 #endif
+#else
 #if (SM_PROXY_GATT_SERVER)
-    nrf_proxys_on_ble_evt(ble_evt);
+    if (g_nrf_main_joint_net == true)
+    {
+        nrf_proxys_on_ble_evt(ble_evt);
+    }
+#endif
 #endif
 }
 
@@ -52,21 +72,9 @@ static void _nrf_mesh_attention(smui_attention_param_t* param)
     {
         nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
     }
-    else
-    {
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
-        nrf_delay_ms(60);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
-        nrf_delay_ms(60);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
-        nrf_delay_ms(60);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
-        nrf_delay_ms(60);
-        nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
-    }
 }
 
-static void nrf_mesh_ui_cbk(smui_notice_t notice, void* param)
+static void _nrf_mesh_ui_cbk(smui_notice_t notice, void* param)
 {
     switch (notice)
     {
@@ -89,13 +97,37 @@ static void nrf_mesh_ui_cbk(smui_notice_t notice, void* param)
     case SMUI_NOTICE_NET_JOINT:
         if (((smui_net_joint_param_t*)param)->success)
         {
-            smui_enable_proxy();
+            g_nrf_main_joint_net = true;
+            nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
+            nrf_delay_ms(60);
+            nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
+            nrf_delay_ms(60);
+            nrf_gpio_pin_write(NRF_INDICATOR_PIN, 0);
         }
+        else
+        {
+            smui_join_net(0, 0);
+        }
+        break;
+    case SMUI_NOTICE_SEC_KEY_UPDATED:
+        if (((smui_key_updated_param_t*)param)->key_type == SMUI_KEYTYPE_NETKEY)
+        {
+#if (NRF_DEMO_ADMIN_SUPPORT == 0)
+            NRF_LOG_INFO("set proxy server\n\r");
+            smui_set_proxy_server(true, ((smui_key_updated_param_t*)param)->idx);
+#endif
+        }
+        break;
+    case SMUI_NOTICE_PROXY_STATUS:
+        NRF_LOG_INFO("Proxy status = %d\n\r", ((smui_proxy_status_param_t*)param)->status);
+#if (NRF_DEMO_ADMIN_SUPPORT)
+        nrf_admin_proxy_status((smui_proxy_status_param_t*)param);
+#endif
         break;
     }
 }
 
-static void nrf_ble_stack_init(void)
+static void _nrf_ble_stack_init(void)
 {
     uint32_t err_code;
 
@@ -110,7 +142,7 @@ static void nrf_ble_stack_init(void)
     ble_enable_params.common_enable_params.vs_uuid_count = 0;
     ble_enable_params.common_enable_params.p_conn_bw_counts = NULL;
     ble_enable_params.gap_enable_params.periph_conn_count = 1;
-    ble_enable_params.gap_enable_params.central_conn_count = 1;
+    ble_enable_params.gap_enable_params.central_conn_count = 2;
     ble_enable_params.gap_enable_params.central_sec_count = 0;
     ble_enable_params.gap_enable_params.p_device_name = NULL;
     ble_enable_params.gatt_enable_params.att_mtu = 69;
@@ -118,6 +150,7 @@ static void nrf_ble_stack_init(void)
     ble_enable_params.gatts_enable_params.attr_tab_size = 1024;
     // Enable BLE stack.
     err_code = softdevice_enable(&ble_enable_params);
+    NRF_LOG_INFO("stack init, err=0x%X\n\r",err_code);
 
     // Register a BLE event handler with the SoftDevice handler library.
     err_code = softdevice_ble_evt_handler_set(_nrf_ble_evt_dispatch);
@@ -129,15 +162,17 @@ void main(void)
     
     nrf_mem_init();
 
-    // twinkle
     nrf_gpio_cfg_output(NRF_INDICATOR_PIN);
-    
-    nrf_ble_stack_init();
+    nrf_gpio_pin_write(NRF_INDICATOR_PIN, 1);
 
+    _nrf_ble_stack_init();
+
+    nrf_ipc_init();
+    
     smport_platform_init();
-    smui_reg_callback(nrf_mesh_ui_cbk);
+    smui_reg_callback(_nrf_mesh_ui_cbk);
     smui_init();
-#if (NRF_DEMO_ADMIN_SUPPORT)
+#if (NRF_DEMO_SWITCH_SUPPORT)
     nrf_switch_init();
 #endif
 #if (NRF_DEMO_LIGHT_SUPPORT)
@@ -151,6 +186,8 @@ void main(void)
     
     for (;;)
     {
+        nrf_ipc_schedule();
+        
         smport_platform_schedule();
 
         NRF_LOG_PROCESS();

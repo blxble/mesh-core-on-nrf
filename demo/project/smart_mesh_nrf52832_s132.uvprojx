@@ -338,8 +338,8 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0x20002c70</StartAddress>
-                <Size>0xd390</Size>
+                <StartAddress>0x20005000</StartAddress>
+                <Size>0xb000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -371,9 +371,9 @@
             <vShortWch>0</vShortWch>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>BLE_STACK_SUPPORT_REQD NRF_SD_BLE_API_VERSION=3 S132 BOARD_PCA10040 NRF52_PAN_12 NRF52_PAN_15 NRF52_PAN_20 NRF52_PAN_31 NRF52_PAN_36 NRF52_PAN_51 CONFIG_GPIO_AS_PINRESET NRF52_PAN_54 NRF52_PAN_55 NRF52_PAN_58 NRF52_PAN_64 SOFTDEVICE_PRESENT NRF52832 NRF52 SWI_DISABLE0 MEM_MANAGER_ENABLED CFG_SEC_CON SM_PORT_PLATFORM=2 SM_CFG_EASY_CONF SM_CFG_EASY_CONFSM_CONF_PB_GATT_ONLY SM_CONF_PROXY_GATT_SERVER</Define>
+              <Define>BLE_STACK_SUPPORT_REQD NRF_SD_BLE_API_VERSION=3 S132 BOARD_PCA10040 NRF52_PAN_12 NRF52_PAN_15 NRF52_PAN_20 NRF52_PAN_31 NRF52_PAN_36 NRF52_PAN_51 CONFIG_GPIO_AS_PINRESET NRF52_PAN_54 NRF52_PAN_55 NRF52_PAN_58 NRF52_PAN_64 SOFTDEVICE_PRESENT NRF52832 NRF52 SWI_DISABLE0 MEM_MANAGER_ENABLED CFG_SEC_CON SM_PORT_PLATFORM=2 SM_CFG_EASY_CONF SM_CFG_EASY_CONFSM_CONF_PB_GATT_ONLY SM_CONF_PROXY_GATT_CLIENT SM_CONF_PROXY_GATT_SERVER</Define>
               <Undefine></Undefine>
-              <IncludePath>D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_advertising;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_db_discovery;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_dtm;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_racp;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_ancs_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_ans_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_bas;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_bas_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_cscs;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_cts_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_dfu;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_dis;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_gls;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_hids;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_hrs;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_hrs_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_hts;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_ias;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_ias_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_lbs;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_lbs_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_lls;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_nus;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_nus_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_rscs;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_rscs_c;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_services\ble_tps;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\common;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\nrf_ble_gatt;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\nrf_ble_qwr;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\ble\peer_manager;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\boards;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\adc;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\clock;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\common;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\comp;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\delay;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\gpiote;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\hal;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\i2s;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\lpcomp;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\pdm;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\power;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\ppi;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\pwm;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\qdec;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\rng;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\rtc;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\saadc;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\spi_master;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\spi_slave;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\swi;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\timer;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\twi_master;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\twis_slave;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\uart;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\usbd;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\wdt;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\bsp;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\button;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\crc16;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\crc32;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\csense;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\csense_drv;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\experimental_section_vars;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\fds;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\fstorage;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\gpiote;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\hardfault;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\hci;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\led_softblink;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\log;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\log\src;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\low_power_pwm;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\mem_manager;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\pwm;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\queue;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\scheduler;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\slip;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\timer;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\twi;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\uart;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\audio;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\cdc;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\cdc\acm;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\hid;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\hid\generic;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\hid\kbd;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\hid\mouse;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\class\msc;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\usbd\config;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\libraries\util;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\softdevice\common\softdevice_handler;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\softdevice\s132\headers;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\softdevice\s132\headers\nrf52;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\components\toolchain;D:\Progra~1\Nordic~1\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt;..\..\api;..\..\demo</IncludePath>
+              <IncludePath>..\..\nrf5_sdk\components;..\..\nrf5_sdk\components\ble\ble_advertising;..\..\nrf5_sdk\components\ble\ble_db_discovery;..\..\nrf5_sdk\components\ble\ble_dtm;..\..\nrf5_sdk\components\ble\ble_racp;..\..\nrf5_sdk\components\ble\ble_services\ble_ancs_c;..\..\nrf5_sdk\components\ble\ble_services\ble_ans_c;..\..\nrf5_sdk\components\ble\ble_services\ble_bas;..\..\nrf5_sdk\components\ble\ble_services\ble_bas_c;..\..\nrf5_sdk\components\ble\ble_services\ble_cscs;..\..\nrf5_sdk\components\ble\ble_services\ble_cts_c;..\..\nrf5_sdk\components\ble\ble_services\ble_dfu;..\..\nrf5_sdk\components\ble\ble_services\ble_dis;..\..\nrf5_sdk\components\ble\ble_services\ble_gls;..\..\nrf5_sdk\components\ble\ble_services\ble_hids;..\..\nrf5_sdk\components\ble\ble_services\ble_hrs;..\..\nrf5_sdk\components\ble\ble_services\ble_hrs_c;..\..\nrf5_sdk\components\ble\ble_services\ble_hts;..\..\nrf5_sdk\components\ble\ble_services\ble_ias;..\..\nrf5_sdk\components\ble\ble_services\ble_ias_c;..\..\nrf5_sdk\components\ble\ble_services\ble_lbs;..\..\nrf5_sdk\components\ble\ble_services\ble_lbs_c;..\..\nrf5_sdk\components\ble\ble_services\ble_lls;..\..\nrf5_sdk\components\ble\ble_services\ble_nus;..\..\nrf5_sdk\components\ble\ble_services\ble_nus_c;..\..\nrf5_sdk\components\ble\ble_services\ble_rscs;..\..\nrf5_sdk\components\ble\ble_services\ble_rscs_c;..\..\nrf5_sdk\components\ble\ble_services\ble_tps;..\..\nrf5_sdk\components\ble\common;..\..\nrf5_sdk\components\ble\nrf_ble_gatt;..\..\nrf5_sdk\components\ble\nrf_ble_qwr;..\..\nrf5_sdk\components\ble\peer_manager;..\..\nrf5_sdk\components\boards;..\..\nrf5_sdk\components\drivers_nrf\adc;..\..\nrf5_sdk\components\drivers_nrf\clock;..\..\nrf5_sdk\components\drivers_nrf\common;..\..\nrf5_sdk\components\drivers_nrf\comp;..\..\nrf5_sdk\components\drivers_nrf\delay;..\..\nrf5_sdk\components\drivers_nrf\gpiote;..\..\nrf5_sdk\components\drivers_nrf\hal;..\..\nrf5_sdk\components\drivers_nrf\i2s;..\..\nrf5_sdk\components\drivers_nrf\lpcomp;..\..\nrf5_sdk\components\drivers_nrf\pdm;..\..\nrf5_sdk\components\drivers_nrf\power;..\..\nrf5_sdk\components\drivers_nrf\ppi;..\..\nrf5_sdk\components\drivers_nrf\pwm;..\..\nrf5_sdk\components\drivers_nrf\qdec;..\..\nrf5_sdk\components\drivers_nrf\rng;..\..\nrf5_sdk\components\drivers_nrf\rtc;..\..\nrf5_sdk\components\drivers_nrf\saadc;..\..\nrf5_sdk\components\drivers_nrf\spi_master;..\..\nrf5_sdk\components\drivers_nrf\spi_slave;..\..\nrf5_sdk\components\drivers_nrf\swi;..\..\nrf5_sdk\components\drivers_nrf\timer;..\..\nrf5_sdk\components\drivers_nrf\twi_master;..\..\nrf5_sdk\components\drivers_nrf\twis_slave;..\..\nrf5_sdk\components\drivers_nrf\uart;..\..\nrf5_sdk\components\drivers_nrf\usbd;..\..\nrf5_sdk\components\drivers_nrf\wdt;..\..\nrf5_sdk\components\libraries\bsp;..\..\nrf5_sdk\components\libraries\button;..\..\nrf5_sdk\components\libraries\crc16;..\..\nrf5_sdk\components\libraries\crc32;..\..\nrf5_sdk\components\libraries\csense;..\..\nrf5_sdk\components\libraries\csense_drv;..\..\nrf5_sdk\components\libraries\experimental_section_vars;..\..\nrf5_sdk\components\libraries\fds;..\..\nrf5_sdk\components\libraries\fstorage;..\..\nrf5_sdk\components\libraries\gpiote;..\..\nrf5_sdk\components\libraries\hardfault;..\..\nrf5_sdk\components\libraries\hci;..\..\nrf5_sdk\components\libraries\led_softblink;..\..\nrf5_sdk\components\libraries\log;..\..\nrf5_sdk\components\libraries\log\src;..\..\nrf5_sdk\components\libraries\low_power_pwm;..\..\nrf5_sdk\components\libraries\mem_manager;..\..\nrf5_sdk\components\libraries\pwm;..\..\nrf5_sdk\components\libraries\queue;..\..\nrf5_sdk\components\libraries\scheduler;..\..\nrf5_sdk\components\libraries\slip;..\..\nrf5_sdk\components\libraries\timer;..\..\nrf5_sdk\components\libraries\twi;..\..\nrf5_sdk\components\libraries\uart;..\..\nrf5_sdk\components\libraries\usbd;..\..\nrf5_sdk\components\libraries\usbd\class\audio;..\..\nrf5_sdk\components\libraries\usbd\class\cdc;..\..\nrf5_sdk\components\libraries\usbd\class\cdc\acm;..\..\nrf5_sdk\components\libraries\usbd\class\hid;..\..\nrf5_sdk\components\libraries\usbd\class\hid\generic;..\..\nrf5_sdk\components\libraries\usbd\class\hid\kbd;..\..\nrf5_sdk\components\libraries\usbd\class\hid\mouse;..\..\nrf5_sdk\components\libraries\usbd\class\msc;..\..\nrf5_sdk\components\libraries\usbd\config;..\..\nrf5_sdk\components\libraries\util;..\..\nrf5_sdk\components\softdevice\common\softdevice_handler;..\..\nrf5_sdk\components\softdevice\s132\headers;..\..\nrf5_sdk\components\softdevice\s132\headers\nrf52;..\..\nrf5_sdk\components\toolchain;..\..\nrf5_sdk\external\segger_rtt;..\..\api;..\..\demo</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -467,6 +467,11 @@
               <FilePath>..\nrf_sys.c</FilePath>
             </File>
             <File>
+              <FileName>nrf_ipc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\nrf_ipc.c</FilePath>
+            </File>
+            <File>
               <FileName>nrf_db_virtual.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\nrf_db_virtual.c</FilePath>
@@ -494,7 +499,7 @@
             <File>
               <FileName>boards.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\boards\boards.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\boards\boards.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -551,7 +556,7 @@
             <File>
               <FileName>bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\bsp\bsp.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\bsp\bsp.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -608,7 +613,7 @@
             <File>
               <FileName>ble_advdata.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\common\ble_advdata.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\common\ble_advdata.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -660,7 +665,7 @@
             <File>
               <FileName>ble_conn_params.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\common\ble_conn_params.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\common\ble_conn_params.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -712,7 +717,7 @@
             <File>
               <FileName>ble_db_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_db_discovery\ble_db_discovery.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\ble_db_discovery\ble_db_discovery.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -764,7 +769,7 @@
             <File>
               <FileName>ble_srv_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\common\ble_srv_common.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\common\ble_srv_common.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -816,7 +821,7 @@
             <File>
               <FileName>nrf_ble_gatt.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -873,7 +878,7 @@
             <File>
               <FileName>nrf_drv_clock.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\clock\nrf_drv_clock.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\clock\nrf_drv_clock.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -925,7 +930,7 @@
             <File>
               <FileName>nrf_drv_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\common\nrf_drv_common.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\common\nrf_drv_common.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -977,7 +982,7 @@
             <File>
               <FileName>nrf_drv_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\uart\nrf_drv_uart.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\uart\nrf_drv_uart.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1029,7 +1034,7 @@
             <File>
               <FileName>nrf_drv_gpiote.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\gpiote\nrf_drv_gpiote.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\gpiote\nrf_drv_gpiote.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1039,7 +1044,7 @@
             <File>
               <FileName>app_error.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\app_error.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\app_error.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1091,7 +1096,7 @@
             <File>
               <FileName>app_error_weak.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\app_error_weak.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\app_error_weak.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1143,7 +1148,7 @@
             <File>
               <FileName>app_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\timer\app_timer.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\timer\app_timer.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1195,7 +1200,7 @@
             <File>
               <FileName>app_util_platform.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\app_util_platform.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\app_util_platform.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1247,7 +1252,7 @@
             <File>
               <FileName>hardfault_implementation.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\hardfault\hardfault_implementation.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\hardfault\hardfault_implementation.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1299,7 +1304,7 @@
             <File>
               <FileName>nrf_assert.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\nrf_assert.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\nrf_assert.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1351,7 +1356,7 @@
             <File>
               <FileName>sdk_errors.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\sdk_errors.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\sdk_errors.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1403,12 +1408,12 @@
             <File>
               <FileName>app_button.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\button\app_button.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\button\app_button.c</FilePath>
             </File>
             <File>
               <FileName>mem_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\mem_manager\mem_manager.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\mem_manager\mem_manager.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1418,7 +1423,7 @@
             <File>
               <FileName>nrf_log_backend_serial.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\log\src\nrf_log_backend_serial.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\log\src\nrf_log_backend_serial.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1470,7 +1475,7 @@
             <File>
               <FileName>nrf_log_frontend.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\log\src\nrf_log_frontend.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\log\src\nrf_log_frontend.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1527,7 +1532,7 @@
             <File>
               <FileName>RTT_Syscalls_KEIL.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt\RTT_Syscalls_KEIL.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\external\segger_rtt\RTT_Syscalls_KEIL.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1579,7 +1584,7 @@
             <File>
               <FileName>SEGGER_RTT.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt\SEGGER_RTT.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\external\segger_rtt\SEGGER_RTT.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1631,7 +1636,7 @@
             <File>
               <FileName>SEGGER_RTT_printf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt\SEGGER_RTT_printf.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\external\segger_rtt\SEGGER_RTT_printf.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -1688,7 +1693,7 @@
             <File>
               <FileName>softdevice_handler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\softdevice\common\softdevice_handler\softdevice_handler.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\softdevice\common\softdevice_handler\softdevice_handler.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>0</UseCPPCompiler>
@@ -2271,6 +2276,11 @@
               <FilePath>..\nrf_sys.c</FilePath>
             </File>
             <File>
+              <FileName>nrf_ipc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\nrf_ipc.c</FilePath>
+            </File>
+            <File>
               <FileName>nrf_db_virtual.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\nrf_db_virtual.c</FilePath>
@@ -2298,7 +2308,7 @@
             <File>
               <FileName>boards.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\boards\boards.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\boards\boards.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2308,7 +2318,7 @@
             <File>
               <FileName>bsp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\bsp\bsp.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\bsp\bsp.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2318,27 +2328,27 @@
             <File>
               <FileName>ble_advdata.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\common\ble_advdata.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\common\ble_advdata.c</FilePath>
             </File>
             <File>
               <FileName>ble_conn_params.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\common\ble_conn_params.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\common\ble_conn_params.c</FilePath>
             </File>
             <File>
               <FileName>ble_db_discovery.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\ble_db_discovery\ble_db_discovery.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\ble_db_discovery\ble_db_discovery.c</FilePath>
             </File>
             <File>
               <FileName>ble_srv_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\common\ble_srv_common.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\common\ble_srv_common.c</FilePath>
             </File>
             <File>
               <FileName>nrf_ble_gatt.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2348,22 +2358,22 @@
             <File>
               <FileName>nrf_drv_clock.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\clock\nrf_drv_clock.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\clock\nrf_drv_clock.c</FilePath>
             </File>
             <File>
               <FileName>nrf_drv_common.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\common\nrf_drv_common.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\common\nrf_drv_common.c</FilePath>
             </File>
             <File>
               <FileName>nrf_drv_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\uart\nrf_drv_uart.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\uart\nrf_drv_uart.c</FilePath>
             </File>
             <File>
               <FileName>nrf_drv_gpiote.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\drivers_nrf\gpiote\nrf_drv_gpiote.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\drivers_nrf\gpiote\nrf_drv_gpiote.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2373,47 +2383,47 @@
             <File>
               <FileName>app_error.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\app_error.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\app_error.c</FilePath>
             </File>
             <File>
               <FileName>app_error_weak.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\app_error_weak.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\app_error_weak.c</FilePath>
             </File>
             <File>
               <FileName>app_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\timer\app_timer.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\timer\app_timer.c</FilePath>
             </File>
             <File>
               <FileName>app_util_platform.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\app_util_platform.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\app_util_platform.c</FilePath>
             </File>
             <File>
               <FileName>hardfault_implementation.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\hardfault\hardfault_implementation.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\hardfault\hardfault_implementation.c</FilePath>
             </File>
             <File>
               <FileName>nrf_assert.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\nrf_assert.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\nrf_assert.c</FilePath>
             </File>
             <File>
               <FileName>sdk_errors.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\util\sdk_errors.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\util\sdk_errors.c</FilePath>
             </File>
             <File>
               <FileName>app_button.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\button\app_button.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\button\app_button.c</FilePath>
             </File>
             <File>
               <FileName>mem_manager.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\mem_manager\mem_manager.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\mem_manager\mem_manager.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2423,12 +2433,12 @@
             <File>
               <FileName>nrf_log_backend_serial.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\log\src\nrf_log_backend_serial.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\log\src\nrf_log_backend_serial.c</FilePath>
             </File>
             <File>
               <FileName>nrf_log_frontend.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\libraries\log\src\nrf_log_frontend.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\libraries\log\src\nrf_log_frontend.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2438,17 +2448,17 @@
             <File>
               <FileName>RTT_Syscalls_KEIL.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt\RTT_Syscalls_KEIL.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\external\segger_rtt\RTT_Syscalls_KEIL.c</FilePath>
             </File>
             <File>
               <FileName>SEGGER_RTT.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt\SEGGER_RTT.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\external\segger_rtt\SEGGER_RTT.c</FilePath>
             </File>
             <File>
               <FileName>SEGGER_RTT_printf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\external\segger_rtt\SEGGER_RTT_printf.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\external\segger_rtt\SEGGER_RTT_printf.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2458,7 +2468,7 @@
             <File>
               <FileName>softdevice_handler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>D:\Program Files\Nordic Semiconductor\nRF5_SDK_12.3.0_d7731ad\components\softdevice\common\softdevice_handler\softdevice_handler.c</FilePath>
+              <FilePath>..\..\nrf5_sdk\components\softdevice\common\softdevice_handler\softdevice_handler.c</FilePath>
             </File>
           </Files>
         </Group>

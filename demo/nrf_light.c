@@ -51,26 +51,26 @@ static void _nrf_light_on_acc_msg(uint8_t elt_idx, smacc_msg_t* msg, sm_addr_t s
             // TODO: set device onoff 
             if (onoff > 0)
             {
-                NRF_LOG_INFO("Light ON!");
+                NRF_LOG_INFO("Light ON!\n\r");
                 nrf_gpio_pin_write(NRF_LED_PIN, 1);
             }
             else
             {
-                NRF_LOG_INFO("Light OFF!");
+                NRF_LOG_INFO("Light OFF!\n\r");
                 nrf_gpio_pin_write(NRF_LED_PIN, 0);
             }
 
             pre_onoff = g_nrf_light_elt.onoff;
             g_nrf_light_elt.onoff = onoff;
 
-            memcpy(&status_msg.opcode, &onoff_status_op, sizeof(sm_msg_opcode_t));
+            sm_memcpy((void*)&status_msg.opcode, (void*)&onoff_status_op, sizeof(sm_msg_opcode_t));
             status_msg.param_len = 3;
             status_msg_param[0] = pre_onoff;
             status_msg_param[1] = onoff;
             status_msg_param[2] = 0;
             status_msg.param = status_msg_param;
 
-            smacc_respond_msg(g_nrf_light_elt.elt_idx, src_addr, appkey_idx, &status_msg);
+            //smacc_respond_msg(g_nrf_light_elt.elt_idx, src_addr, appkey_idx, &status_msg);
         }
         else
         {
@@ -87,7 +87,7 @@ void nrf_light_init(void)
 {
     nrf_gpio_cfg_output(NRF_LED_PIN);
     
-    memset(&g_nrf_light_elt, 0x00, sizeof(g_nrf_light_elt));
+    sm_memset(&g_nrf_light_elt, 0x00, sizeof(g_nrf_light_elt));
     
     g_nrf_light_elt.elt_idx = smacc_reg_element(sizeof(g_nrf_light_mid)/sizeof(sm_mid_t), g_nrf_light_mid, 0, NULL, 
                                                     _nrf_light_on_acc_msg);

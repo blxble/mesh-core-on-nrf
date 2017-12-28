@@ -14,7 +14,7 @@
 #include "app_timer.h"
 #include "app_button.h"
 
-#define NRF_SWITCH_PIN         (4)
+#define NRF_SWITCH_PIN         13//(4)
 
 typedef struct
 {
@@ -57,7 +57,7 @@ static void _nrf_switch_on_off(void)
     smacc_msg_t onoff_msg;
     uint8_t onoff_msg_param[4];
 
-    memcpy(&onoff_msg.opcode, &onoff_set_op, sizeof(sm_msg_opcode_t));
+    sm_memcpy((void*)&onoff_msg.opcode, (void*)&onoff_set_op, sizeof(sm_msg_opcode_t));
     onoff = g_nrf_switch_elt.onoff ? 0 : 1;
     onoff_msg_param[0] = onoff;
     onoff_msg_param[1] = 0;     // tid
@@ -71,12 +71,34 @@ static void _nrf_switch_on_off(void)
     g_nrf_switch_elt.onoff = onoff;
 }
 
+bool timer_start = false;
 static void _nrf_switch_button_event_handler(uint8_t pin_no, uint8_t button_action)
 {
+#if 1
+    static app_timer_id_t timer_id;
+
+    if (button_action == APP_BUTTON_PUSH)
+    {
+        if (timer_start == false)
+        {
+            timer_id = (app_timer_id_t)smport_malloc(sizeof(app_timer_t), SM_MEM_RETENTION);
+            sm_memset(timer_id, 0x00, sizeof(app_timer_t));
+            app_timer_create(&timer_id, APP_TIMER_MODE_REPEATED, (app_timer_timeout_handler_t)_nrf_switch_on_off);
+            app_timer_start(timer_id, APP_TIMER_TICKS((200 * 10), 0), NULL);
+        }
+        else
+        {
+            app_timer_stop(timer_id);
+            smport_free(timer_id);
+        }
+    }
+#else
+    
     if (button_action == APP_BUTTON_PUSH)
     {
         _nrf_switch_on_off();
     }
+#endif
 }
 
 void nrf_switch_init(void)
@@ -89,7 +111,7 @@ void nrf_switch_init(void)
     app_button_init(buttons, 1, APP_TIMER_TICKS(50, 0));
     app_button_enable();
     
-    memset(&g_nrf_switch_elt, 0x00, sizeof(g_nrf_switch_elt));
+    sm_memset(&g_nrf_switch_elt, 0x00, sizeof(g_nrf_switch_elt));
     
     g_nrf_switch_elt.elt_idx = smacc_reg_element(sizeof(g_nrf_switch_mid)/sizeof(sm_mid_t), g_nrf_switch_mid, 0, NULL, 
                                                     _nrf_switch_on_acc_msg);

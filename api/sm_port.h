@@ -46,6 +46,18 @@ void* smport_malloc(uint16_t size, uint8_t type);
 void smport_free(void* mem);
 
 /**
+ * enter critical exectution protection
+ * @param[out]  cr       critical nest value
+ */
+void smport_enter_critical(uint32_t* cr);
+
+/**
+ * exit from critical execution protection
+ * @param[in]   cr       critical nest value
+ */
+void smport_exit_critical(uint32_t cr);
+
+/**
  * timer callback definition
  * @param[in]  context   context pointer comes from timer starting
  */
@@ -59,19 +71,19 @@ void smport_init_timer(void);
 /**
  * Create a timer.
  * Timer should stand by after created.
- * @param[in]  handler  timeout callback handler
  * @retval     created timer id
  */
-void* smport_create_timer(smport_timer_handler handler);
+void* smport_create_timer(void);
 
 /**
  * Start a timer.
  * Timer starts to run.
  * @param[in]  timer   timer id
  * @param[in]  timeout timer period, in 10 millisecond
+ * @param[in]  handler  timeout callback handler
  * @param[in]  context to be passed to timeout handler when timer expired
  */
-void smport_start_timer(void* timer, uint32_t timeout, void* context);
+void smport_start_timer(void* timer, uint32_t timeout, smport_timer_handler handler, void* context);
 
 /**
  * Stop a timer.
@@ -165,10 +177,11 @@ uint16_t smport_pbgatt_server_get_mtu(uint16_t conn_hdl);
 /**
  * Send PB-GATT PDU on server side
  * Use @smport_evt_prov_server_sent_complete() to indicate sending completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data      PDU data
  * @param[in]  len       PDU data length
  */
-void smport_pbgatt_server_send_pdu(uint8_t* data, uint16_t len);
+void smport_pbgatt_server_send_pdu(uint16_t conn_hdl, uint8_t* data, uint16_t len);
 
 /**
  * Add PB-GATT service client
@@ -184,10 +197,11 @@ uint16_t smport_pbgatt_client_get_mtu(uint16_t conn_hdl);
 /**
  * Send PB-GATT PDU on client side
  * Use @smport_evt_prov_client_sent_complete() to indicate sending completed
+ * @param[in]  conn_hdl  connection handle
  * @param[in]  data      PDU data
  * @param[in]  len       PDU data length
  */
-void smport_pbgatt_client_send_pdu(uint8_t* data, uint16_t len);
+void smport_pbgatt_client_send_pdu(uint16_t conn_hdl, uint8_t* data, uint16_t len);
 
 /**
  * Add proxy service server
@@ -203,10 +217,11 @@ uint16_t smport_proxy_server_get_mtu(uint16_t conn_hdl);
 /**
  * Send proxy PDU on server side
  * Use @smport_evt_proxy_server_sent_complete() to indicate sending completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data      PDU data
  * @param[in]  len       PDU data length
  */
-void smport_proxy_server_send_pdu(uint8_t* data, uint16_t len);
+void smport_proxy_server_send_pdu(uint16_t conn_hdl, uint8_t* data, uint16_t len);
 
 
 /**
@@ -222,8 +237,9 @@ uint16_t smport_proxy_client_get_mtu(uint16_t conn_hdl);
 /**
  * Send proxy PDU on client side
  * Use @smport_evt_proxy_client_sent_complete() to indicate sending completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data      PDU data
  * @param[in]  len       PDU data length
  */
-void smport_proxy_client_send_pdu(uint8_t* data, uint16_t len);
+void smport_proxy_client_send_pdu(uint16_t conn_hdl, uint8_t* data, uint16_t len);
 #endif

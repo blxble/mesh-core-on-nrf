@@ -90,6 +90,8 @@ sm_uuid_t* smdb_get_node_uuid_by_dev_addr(sm_addr_t dev_addr);
 sm_addr_t smdb_get_node_dev_addr_by_uuid(sm_uuid_t* uuid);
 sm_addr_t smdb_get_node_dev_addr_by_idx(uint16_t idx);
 uint16_t smdb_get_provisioned_node_number(void);
+void smdb_store_device_info(sm_addr_t dev_addr, sm_device_info_t* dev_info);
+void smdb_load_device_info(sm_addr_t dev_addr, sm_device_info_t* dev_info);
 void smdb_store_element_info(sm_addr_t dev_addr, sm_addr_t elt_addr, uint8_t mid_num, uint8_t vmid_num,
                                              sm_mid_t* mid_arr, sm_vmid_t* vmid_arr);
 uint16_t smdb_get_element_info_num(sm_addr_t dev_addr);

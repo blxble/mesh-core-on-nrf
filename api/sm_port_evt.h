@@ -54,53 +54,61 @@ void smport_evt_disconnected(uint16_t conn_hdl, uint8_t reason);
 
 /**
  * Indicate received data on PB-GATT server side
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data       received data
  * @param[in]  data_len   data length
  */
-void smport_evt_prov_server_data_in(uint8_t* data, uint16_t data_len);
+void smport_evt_prov_server_data_in(uint16_t conn_hdl, uint8_t* data, uint16_t data_len);
 
 /**
  * Indicate PB-GATT server sending PDU completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  status     sucess or fail
  */
-void smport_evt_prov_server_sent_complete(bool status);
+void smport_evt_prov_server_sent_complete(uint16_t conn_hdl, bool status);
 
 /**
  * Indicate received data on PB-GATT client side
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data       received data
  * @param[in]  data_len   data length
  */
-void smport_evt_prov_client_data_in(uint8_t* data, uint16_t data_len);
+void smport_evt_prov_client_data_in(uint16_t conn_hdl, uint8_t* data, uint16_t data_len);
 
 /**
  * Indicate PB-GATT client sending PDU completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  status     sucess or fail
  */
-void smport_evt_prov_client_sent_complete(bool status);
+void smport_evt_prov_client_sent_complete(uint16_t conn_hdl, bool status);
 
 /**
  * Indicate received data on proxy server side
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data       received data
  * @param[in]  data_len   data length
  */
-void smport_evt_proxy_server_data_in(uint8_t* data, uint16_t data_len);
+void smport_evt_proxy_server_data_in(uint16_t conn_hdl, uint8_t* data, uint16_t data_len);
 
 /**
  * Indicate proxy server sending PDU completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  status     sucess or fail
  */
-void smport_evt_proxy_server_sent_complete(bool status);
+void smport_evt_proxy_server_sent_complete(uint16_t conn_hdl, bool status);
 
 /**
  * Indicate received data on proxy client side
  * @param[in]  data       received data
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  data_len   data length
  */
-void smport_evt_proxy_client_data_in(uint8_t* data, uint16_t data_len);
+void smport_evt_proxy_client_data_in(uint16_t conn_hdl, uint8_t* data, uint16_t data_len);
 
 /**
  * Indicate proxy client sending PDU completed
+ * @param[in]  conn_hdl   connection handle
  * @param[in]  status     sucess or fail
  */
-void smport_evt_proxy_client_sent_complete(bool status);
+void smport_evt_proxy_client_sent_complete(uint16_t conn_hdl, bool status);
 #endif

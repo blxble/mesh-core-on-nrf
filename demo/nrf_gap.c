@@ -15,21 +15,37 @@
 #include "nordic_common.h"
 #include "nrf_soc.h"
 #include "ble_advdata.h"
+#include "nrf_log.h"
+#include "nrf_log_ctrl.h"
+#include "nrf_ipc.h"
 
-uint16_t g_nrf_conn_hdl;
 sm_bdaddr_t g_nrf_peer_bd;
 
 static void _nrf_on_ble_gap_evt_adv_report(ble_gap_evt_t const * gap_evt)
 {
     ble_gap_evt_adv_report_t* rpt = (ble_gap_evt_adv_report_t*)&gap_evt->params.adv_report;
     sm_bdaddr_t bd;
+    nrf_ipc_adv_report_param_t adv_rpt;
 
     bd.addr_type = rpt->peer_addr.addr_type;
-    memcpy(bd.addr, rpt->peer_addr.addr, BLE_GAP_ADDR_LEN);
+    sm_memcpy(bd.addr, rpt->peer_addr.addr, BLE_GAP_ADDR_LEN);
     
-    smport_evt_adv_report(&bd, rpt->type, rpt->data, rpt->dlen, rpt->rssi);
+    //smport_evt_adv_report(&bd, rpt->type, rpt->data, rpt->dlen, rpt->rssi);
+    adv_rpt.bd = &bd;
+    adv_rpt.adv_type = rpt->type;
+    adv_rpt.data = rpt->data;
+    adv_rpt.data_len = rpt->dlen;
+    adv_rpt.rssi = rpt->rssi;
+    nrf_ipc_write(NRF_IPC_TAG_ADV_REPORT, (nrf_ipc_write_param_t*)&adv_rpt);
 }
 
+static void _nrf_on_ble_gap_evt_disconnected(ble_gap_evt_t const * gap_evt)
+{
+    nrf_ipc_disconnected_param_t disc;
+    disc.conn_hdl = gap_evt->conn_handle;
+    disc.reason = gap_evt->params.disconnected.reason;
+    nrf_ipc_write(NRF_IPC_TAG_DISCONNECTED, (nrf_ipc_write_param_t*)&disc);
+}
 
 void nrf_on_ble_gap_evt(ble_evt_t * ble_evt)
 {
@@ -50,11 +66,13 @@ void nrf_on_ble_gap_evt(ble_evt_t * ble_evt)
             break;
         case BLE_GAP_EVT_CONNECTED:
             g_nrf_peer_bd.addr_type = gap_evt->params.connected.peer_addr.addr_type;
-            memcpy(g_nrf_peer_bd.addr, gap_evt->params.connected.peer_addr.addr, BLE_GAP_ADDR_LEN);
+            sm_memcpy(g_nrf_peer_bd.addr, gap_evt->params.connected.peer_addr.addr, BLE_GAP_ADDR_LEN);
 
-            sd_ble_gap_conn_param_update(g_nrf_conn_hdl, &conn_param);
+            //sd_ble_gap_conn_param_update(ble_evt->evt.gap_evt.conn_handle, &conn_param);
             break;
         case BLE_GAP_EVT_DISCONNECTED:
+            NRF_LOG_INFO("BLE_GAP_EVT_DISCONNECTED, conn_hdl=0x%X,reason=0x%X\n\r", gap_evt->conn_handle, gap_evt->params.disconnected.reason);
+            _nrf_on_ble_gap_evt_disconnected(gap_evt);
             break;
         case BLE_GAP_EVT_CONN_PARAM_UPDATE_REQUEST:
             break;
@@ -112,8 +130,8 @@ void smport_aes_encrypt(uint8_t* key, uint8_t* clear_text)
     nrf_ecb_hal_data_t* ecb_data;
 
     ecb_data = smport_malloc(sizeof(nrf_ecb_hal_data_t), SM_MEM_NON_RETENTION);
-    memcpy(&ecb_data->key, key, SOC_ECB_KEY_LENGTH);
-    memcpy(&ecb_data->cleartext, clear_text, SOC_ECB_CLEARTEXT_LENGTH);
+    sm_memcpy(&ecb_data->key, key, SOC_ECB_KEY_LENGTH);
+    sm_memcpy(&ecb_data->cleartext, clear_text, SOC_ECB_CLEARTEXT_LENGTH);
 
     sd_ecb_block_encrypt(ecb_data);
 
@@ -137,7 +155,7 @@ void smport_gatt_advertise(uint16_t svc_uuid, uint8_t* svc_data, uint8_t data_le
     adv_data[5] = 0x16;
     adv_data[6] = (uint8_t)(svc_uuid & 0x00FF);
     adv_data[7] = (uint8_t)(svc_uuid >> 8);
-    memcpy(&adv_data[8], svc_data, data_len);
+    sm_memcpy(&adv_data[8], svc_data, data_len);
 
     smport_start_advertise(BLE_GAP_ADV_TYPE_ADV_IND, 0xA0, 0xA0, 0x07, adv_data, len);
 
@@ -155,7 +173,7 @@ void smport_gatt_create_connect(sm_bdaddr_t* bd, uint16_t gatt_svc_uuid)
         .adv_dir_report = 0,
         .interval       = SM_CONF_PBGATT_SCAN_INTVL,
         .window         = SM_CONF_PBGATT_SCAN_WIN,
-        .timeout        = 0x0000,
+        .timeout        = 0,
     };
 
     ble_gap_conn_params_t const conn_param =
@@ -166,15 +184,18 @@ void smport_gatt_create_connect(sm_bdaddr_t* bd, uint16_t gatt_svc_uuid)
         .conn_sup_timeout  = SM_CONF_PBGATT_SUPERVISION,
     };
 
+    addr.addr_id_peer = 0;
     addr.addr_type = bd->addr_type;
-    memcpy(addr.addr, bd->addr, BLE_GAP_ADDR_LEN);
+    sm_memcpy(addr.addr, bd->addr, BLE_GAP_ADDR_LEN);
 
     err = sd_ble_gap_connect(&addr, &scan_param, &conn_param);
 }
 
 void smport_gatt_disconnect(uint16_t conn_hdl, uint8_t reason, uint16_t gatt_svc_uuid)
 {
-    sd_ble_gap_disconnect(conn_hdl, reason);
+    uint32_t err;
+    
+    err = sd_ble_gap_disconnect(conn_hdl, reason);
 }
 
 #endif

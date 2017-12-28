@@ -17,7 +17,7 @@
 #define SM_PB_GATT_ONLY                     (SM_PB_GATT_SUPPORT && 0)
 #endif
 
-#define SM_PROXY_GATT_SUPPORT               (0)
+#define SM_PROXY_GATT_SUPPORT               (1)
 #if defined (SM_CONF_PROXY_GATT_SERVER)
 #define SM_PROXY_GATT_SERVER                (SM_PROXY_GATT_SUPPORT && 1)
 #else
@@ -34,7 +34,7 @@
 #define SM_PROXY_GATT_ONLY                  (SM_PROXY_GATT_CLIENT && 0)
 #endif
 #define SM_RELAY_SUPPORT                    (1)
-#define SM_DUPLICATED_CACHE_DEPTH           (8)
+#define SM_DUPLICATED_CACHE_DEPTH           (32)
 #define SM_TRANSMIC_64BIT                   (0)
 #define SM_TRANS_REPLAY_PROTECT_LIST_SIZE   (16)
 #define SM_PROVISIONER_SUPPORT              (1)
@@ -110,6 +110,7 @@
  *****************************************************************************
  *                                NETWORK LAYER
  */
+#define SM_CONF_NWK_TX_Q_SIZE               (32)
 #define SM_CONF_RELAY_RANDOM_DELAY_MAX      (20)            // x10ms
 
 /**
@@ -207,6 +208,7 @@ extern uint16_t g_sm_conf_secure_beacon_evt_num;
 extern uint16_t g_sm_conf_secure_beacon_period;
 extern uint16_t g_sm_conf_period_beacon_intvl;
 extern uint16_t g_sm_conf_period_beacon_evt_num;
+extern uint16_t g_sm_conf_nwk_tx_q_size;
 extern uint16_t g_sm_conf_relay_random_delay_max;
 extern uint8_t g_sm_conf_retrans_seg_pkt_times;
 extern uint16_t g_sm_conf_retrans_tx_timeout;
@@ -300,6 +302,7 @@ extern uint32_t g_sm_conf_elt_light_cache_flush_timeout;
  *****************************************************************************
  *                                NETWORK LAYER
  */
+#define SM_CONF_NWK_TX_Q_SIZE               (g_sm_conf_nwk_tx_q_size)
 #define SM_CONF_RELAY_RANDOM_DELAY_MAX      (g_sm_conf_relay_random_delay_max)
 
 /**
@@ -367,4 +370,6 @@ extern uint32_t g_sm_conf_elt_light_cache_flush_timeout;
 
 void sm_config_init(void);
 #endif
+
+
 
